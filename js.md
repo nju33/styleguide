@@ -1,4 +1,6 @@
-## ファイル名
+## 命名規則
+
+### ファイル名
 
 少英数字を`-`で繋いだものを使う。
 
@@ -10,7 +12,74 @@ foo-bar.tsx
 FooBar.tsx
 ```
 
+### ディレクトリ名
+
+中のモジュールを1つにするような`/index\.[tj]sx?$/`を提供する場合**単数形**、各ファイルにアクセスするような形なら**複数形**にする。
+
+```sh
+# 👍
+helper
+  index.ts
+  foo.ts
+  bar.ts
+  
+# 👍
+helpers
+  foo.ts
+  bar.ts
+  
+# 👎
+helpers
+  index.ts
+  foo.ts
+  bar.ts
+  
+# 👎
+helper
+  index.ts
+  foo.ts
+  bar.ts
+```
+
+### 変数名
+
+変数などは、ローワーキャメルケース (lower camel case)を使う。
+
+```ts
+// 👍
+const fooVal = 'foo';
+
+// 👎
+const foo_val = 'foo';
+```
+
+クラス名、Reactコンポーネントな関数に限りアッパーキャメルケース (upper camel case)を使う。
+
+```ts
+// 👍
+class Foo {}
+
+// 👍
+class Button = () => <button>Button</button>;
+
+
+// 👎
+class button = () => <button>Button</button>;
+```
+
 ## コード
+
+### 変数定義の `const` `let` は１つに１つ
+
+```ts
+// 👍
+const foo = 'foo';
+const bar = 'bar';
+
+// 👎
+const foo = 'foo',
+      bar = 'bar';
+```
 
 ### `{ ... }` は省略しない
 
@@ -65,6 +134,65 @@ const fn = obj => obj.id;
 // 👎
 const fn = () => /* ... */
 ```
+
+### `;` を付ける
+
+```ts
+// 👍
+const foo = 123;
+
+// 👎
+const foo = 123
+```
+
+[Prettier の Semicolons](https://prettier.io/docs/en/options.html#semicolons)を`all`設定にする。
+
+### `"` より `'`
+
+```ts
+// 👍
+const foo = 'value';
+
+// 👎
+const foo = "value";
+```
+
+[Prettier の Quotes](https://prettier.io/docs/en/options.html#quotes)を`true`設定にする。
+
+### 1行は`80`文字まで
+
+(`...`は40文字ぐらい）
+
+```ts
+// 👍
+const foo = [
+  'fooo...',
+  'barr...',
+  'bazz...',
+];
+
+// 👎
+const foo = ['fooo...', 'barr...', 'bazz...'];
+```
+
+[Prettier の Print Width](https://prettier.io/docs/en/options.html#print-width)を`80`設定にする。
+
+### `[tab]` より `[space][space]`
+
+```ts
+// 👍
+const foo = [
+  [space][space]'foo',
+];
+
+// 👎
+const foo = [
+  [tab]'foo',
+];
+```
+
+[Prettier の Tab Width](https://prettier.io/docs/en/options.html#tab-width)を`2`設定にする。  
+[Prettier の Tabs](https://prettier.io/docs/en/options.html#tabs)を`false`設定にする。
 
 ## コードをプッシュする前に
 
