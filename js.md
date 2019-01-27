@@ -212,9 +212,9 @@ const foo = [
 <button
   type="button"
   onClick={() => {/* ... */}}
-/>button<button>
+>button<button>
 // 👎
-<button type="button" onClick={() => {/* ... */}} />button<button>
+<button type="button" onClick={() => {/* ... */}}>button<button>
 ```
 
 ## コードをプッシュする前に
