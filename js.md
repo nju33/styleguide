@@ -194,6 +194,29 @@ const foo = [
 [Prettier の Tab Width](https://prettier.io/docs/en/options.html#tab-width)を`2`設定にする。  
 [Prettier の Tabs](https://prettier.io/docs/en/options.html#tabs)を`false`設定にする。
 
+## JSX
+
+### オブジェクトと同じルール
+
+属性が１つなら1行、それ以外なら１つずつ改行して記述。（恐らく Prettier でもそうなるのでそれに従う）
+
+```jsx
+// 👍
+<button type="button">button</button>
+// 👎
+<button
+  type="button"
+>button</button>
+
+// 👍
+<button
+  type="button"
+  onClick={() => {/* ... */}}
+/>button<button>
+// 👎
+<button type="button" onClick={() => {/* ... */}} />button<button>
+```
+
 ## コードをプッシュする前に
 
 以下で整形・修正・確認してからプッシュします。
