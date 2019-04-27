@@ -1,4 +1,5 @@
 # styleguide
 
-- [js](js.md)
-- [css](css.md)
+- [JavaScript](js.md)
+- [TypeScript](ts.md)
+- [CSS](css.md)
