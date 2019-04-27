@@ -12,6 +12,23 @@ foo-bar.tsx
 FooBar.tsx
 ```
 
+`index.*`に置けるのは`import`と`export`だけ。
+
+```js
+// 👍
+export {AHelper} from './a-helper';
+export {Foo} from './foo';
+export default Foo;
+
+// 👎
+import {AHelper} from './a-helper';
+
+export class Foo {
+	/* ... */
+}
+export default Foo;
+```
+
 ### ディレクトリ名
 
 中のモジュールを1つにするような`/index\.[tj]sx?$/`を提供する場合**単数形**、各ファイルにアクセスするような形なら**複数形**にする。
@@ -22,18 +39,18 @@ helper
   index.ts
   foo.ts
   bar.ts
-  
+
 # 👍
 helpers
   foo.ts
   bar.ts
-  
+
 # 👎
 helpers
   index.ts
   foo.ts
   bar.ts
-  
+
 # 👎
 helper
   index.ts
@@ -83,7 +100,7 @@ const foo = 'foo',
 
 ### `{ ... }` は省略しない
 
-#### `if` 
+#### `if`
 
 ```ts
 // 👍
@@ -97,7 +114,7 @@ if (bool) /* ... */
 
 `for` `while` も同様。
 
-#### `switch` 
+#### `switch`
 
 ```ts
 // 👍
@@ -191,7 +208,7 @@ const foo = [
 ];
 ```
 
-[Prettier の Tab Width](https://prettier.io/docs/en/options.html#tab-width)を`2`設定にする。  
+[Prettier の Tab Width](https://prettier.io/docs/en/options.html#tab-width)を`2`設定にする。
 [Prettier の Tabs](https://prettier.io/docs/en/options.html#tabs)を`false`設定にする。
 
 ## JSX
