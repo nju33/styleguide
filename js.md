@@ -164,6 +164,51 @@ const foo = 123
 
 [Prettier の Semicolons](https://prettier.io/docs/en/options.html#semicolons)を`all`設定にする。
 
+### メソッド
+
+渡すだけのものはプロパティ初期化子で定義
+実行するのもは単にメソッドとして定義
+
+```js
+// 👍
+class A {
+  foo() {/* ... */}
+
+  process() {
+    run(this.foo())
+  }
+}
+
+// 👎
+class A {
+  foo() {/* ... */}
+
+  process() {
+    run(this.foo)
+  }
+}
+```
+
+```js
+// 👍
+class A {
+  foo = () => {/* ... */}
+
+  process() {
+    run(this.foo)
+  }
+}
+
+// 👎
+class A {
+  foo = () => {/* ... */}
+
+  process() {
+    run(this.foo())
+  }
+}
+```
+
 ### `"` より `'`
 
 ```ts
