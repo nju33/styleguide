@@ -231,7 +231,7 @@ const fn = () => {
     const result = process(data);
 
     if (!result.status) {
-      fooError.message = err.message;
+      fooError.message = 'エラーですよ';
       throw fooError;
     }
   });
@@ -243,10 +243,48 @@ const fn = () => {
     const result = process(data);
 
     if (!result.status) {
-      throw new FooError(err.message);
+      throw new FooError('エラーですよ');
     }
   });
 }
+```
+
+### サイクル定数
+
+決められた順番で取得したい場合
+
+```js
+// 👍
+function* getCycle(arr) {
+  while (1) {
+    yield* arr;
+  }
+}
+
+const xxx = () => {
+  const color = getCycle(['#fff', '#ccc']);
+
+  return items.map(item => {
+    return (
+      <tr key={item.id} style={{color: color.next().value}}>
+        <td>{item.name}</td>
+      </tr>
+    );
+  });
+};
+
+// 👎
+const xxx = () => {
+  const colors = ['#ccc', '#fff'];
+
+  return items.map((item, i) => {
+    return (
+      <tr key={item.id} style={{color: colors[i % 2]}}>
+        <td>{item.name}</td>
+      </tr>
+    );
+  });
+};
 ```
 
 ### `"` より `'`
