@@ -31,7 +31,7 @@ export default Foo;
 
 ### ディレクトリ名
 
-中のモジュールを1つにするような`/index\.[tj]sx?$/`を提供する場合**単数形**、各ファイルにアクセスするような形なら**複数形**にする。
+中のモジュールを 1 つにするような`/index\.[tj]sx?$/`を提供する場合**単数形**、各ファイルにアクセスするような形なら**複数形**にする。
 
 ```sh
 # 👍
@@ -70,7 +70,7 @@ const fooVal = 'foo';
 const foo_val = 'foo';
 ```
 
-クラス名、Reactコンポーネントな関数に限りアッパーキャメルケース (upper camel case)を使う。
+クラス名、React コンポーネントな関数に限りアッパーキャメルケース (upper camel case)を使う。
 
 ```ts
 // 👍
@@ -95,7 +95,7 @@ const bar = 'bar';
 
 // 👎
 const foo = 'foo',
-      bar = 'bar';
+  bar = 'bar';
 ```
 
 ### `{ ... }` は省略しない
@@ -123,7 +123,8 @@ switch (leftHand) {
     /* ... */
     break;
   }
-  default: {}
+  default: {
+  }
 }
 
 // 👎
@@ -159,7 +160,7 @@ const fn = () => /* ... */
 const foo = 123;
 
 // 👎
-const foo = 123
+const foo = 123;
 ```
 
 [Prettier の Semicolons](https://prettier.io/docs/en/options.html#semicolons)を`all`設定にする。
@@ -172,19 +173,23 @@ const foo = 123
 ```js
 // 👍
 class A {
-  foo() {/* ... */}
+  foo() {
+    /* ... */
+  }
 
   process() {
-    run(this.foo())
+    run(this.foo());
   }
 }
 
 // 👎
 class A {
-  foo() {/* ... */}
+  foo() {
+    /* ... */
+  }
 
   process() {
-    run(this.foo)
+    run(this.foo);
   }
 }
 ```
@@ -192,20 +197,55 @@ class A {
 ```js
 // 👍
 class A {
-  foo = () => {/* ... */}
+  foo = () => {
+    /* ... */
+  };
 
   process() {
-    run(this.foo)
+    run(this.foo);
   }
 }
 
 // 👎
 class A {
-  foo = () => {/* ... */}
+  foo = () => {
+    /* ... */
+  };
 
   process() {
-    run(this.foo())
+    run(this.foo());
   }
+}
+```
+
+### エラー
+
+起こりうるエラーは最初に定義する。
+
+```js
+// 👍
+const fn = () => {
+  const fooError = new FooError();
+
+  await process().then(data => {
+    const result = process(data);
+
+    if (!result.status) {
+      fooError.message = err.message;
+      throw fooError;
+    }
+  });
+}
+
+// 👎
+const fn = () => {
+  await process().then(data => {
+    const result = process(data);
+
+    if (!result.status) {
+      throw new FooError(err.message);
+    }
+  });
 }
 ```
 
@@ -216,22 +256,18 @@ class A {
 const foo = 'value';
 
 // 👎
-const foo = "value";
+const foo = 'value';
 ```
 
 [Prettier の Quotes](https://prettier.io/docs/en/options.html#quotes)を`true`設定にする。
 
-### 1行は`80`文字まで
+### 1 行は`80`文字まで
 
-(`...`は40文字ぐらい）
+(`...`は 40 文字ぐらい）
 
 ```ts
 // 👍
-const foo = [
-  'fooo...',
-  'barr...',
-  'bazz...',
-];
+const foo = ['fooo...', 'barr...', 'bazz...'];
 
 // 👎
 const foo = ['fooo...', 'barr...', 'bazz...'];
@@ -260,7 +296,7 @@ const foo = [
 
 ### オブジェクトと同じルール
 
-属性が１つなら1行、それ以外なら１つずつ改行して記述。（恐らく Prettier でもそうなるのでそれに従う）
+属性が１つなら 1 行、それ以外なら１つずつ改行して記述。（恐らく Prettier でもそうなるのでそれに従う）
 
 ```jsx
 // 👍

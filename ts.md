@@ -64,7 +64,7 @@ export interface ModuleName {
 const bar: ModuleName['Bar'] = {id: 'bar'};
 
 // 👎
-namespace ModuleName {
+export namespace ModuleName {
   export interface AElement {
     id: string
   }
