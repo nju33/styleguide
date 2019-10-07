@@ -58,6 +58,20 @@ helper
   bar.ts
 ```
 
+### ファイル名
+
+`* as var`で読み込みたいものは`<name>.var.js`として作成する。
+
+```js
+# 👍
+import * as var from '<name>.var.js>;
+# 👍
+import {var} from 'var.js';
+
+# 👎
+import * as var from 'var.js';
+```
+
 ### 変数名
 
 変数などは、ローワーキャメルケース (lower camel case)を使う。
